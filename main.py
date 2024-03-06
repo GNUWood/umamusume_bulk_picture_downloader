@@ -50,6 +50,9 @@ with open("info.json","w",encoding="utf-8") as f:
 print(f"{num}人分のデータを取得しました。画像のリクエストを開始します。")
 
 #ディレクトリチェック
+
+chara_number_list = ""
+
 dir_name = ["制服","勝負服","原案","starting future"]
 for i in dir_name:
     if os.path.isdir(i):
@@ -64,7 +67,10 @@ for i in data["character"]:
         thread.start()
 
     thread.join()
+    chara_number_list += f"{num}: {i['name']}\n"
     num = num + 1
     print(f"完了: {i['name']}")
+with open("character_id.txt","w", encoding="utf-8") as f:
+    f.write(chara_number_list)
 
 print("全てのキャラクターの画像取得が完了しました。")
